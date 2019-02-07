@@ -12,16 +12,16 @@ async function init() {
 
     if (listOfAssets) {
         for (let i = 0; i < listOfAssets.length; i++) {
-            await sleep(500);
+            await sleep(500); // Throttle for api rate limits.
             let asset = await coingecko.getAssetData(listOfAssets[i].id);
-            console.log(asset);
+            console.log(`Completed fetch for: ${asset.id}`);
         }
 
         // Write all assets to a local JSON file
-        // var fileContents = JSON.stringify(listOfAssets, null, 2);
-        // fs.writeFile('allCoins.json', fileContents, 'utf8', () => {
-        //     console.log('All Assets File Write completed');
-        // });
+        var fileContents = JSON.stringify(listOfAssets, null, 2);
+        fs.writeFile('gist/allCoins.json', fileContents, 'utf8', () => {
+            console.log('All Assets File Write completed');
+        });
     }
 }
 
