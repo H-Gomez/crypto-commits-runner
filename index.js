@@ -1,5 +1,5 @@
 const sleep = require('util').promisify(setTimeout);
-const coingecko = require('./api');
+const coingecko = require('./api/coingecko');
 
 async function init() {
     let listOfAssets;
