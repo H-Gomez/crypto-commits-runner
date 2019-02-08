@@ -42,13 +42,16 @@ function updateGist(id) {
 
     const options = {
         method: 'PATCH',
-        headers: { 'user-agent': 'node.js', Authorization: process.env.GITHUB_TOKEN },
-        json: JSON.stringify(gistObject)
+        headers: {
+            'user-agent': 'node.js',
+            Authorization: 'token ' + process.env.GITHUB_TOKEN
+        },
+        json: gistObject
     };
 
     request(url, options, (error, response, body) => {
         if (!error) {
-            console.log(response.statusCode);
+            console.log(body);
         } else {
             console.log(error);
         }
