@@ -1,5 +1,6 @@
 const sleep = require('util').promisify(setTimeout);
 const coingecko = require('./api/coingecko');
+const github = require('./api/github');
 
 async function init() {
     let listOfAssets;
@@ -7,7 +8,7 @@ async function init() {
     try {
         listOfAssets = await coingecko.getAllAssets();
     } catch (err) {
-        console.log(err);
+        throw new Error('Unable to get list of assets from API');
     }
 
     if (listOfAssets) {
@@ -19,9 +20,17 @@ async function init() {
 
         // Write all assets to a local JSON file
         var fileContents = JSON.stringify(listOfAssets, null, 2);
-        fs.writeFile('gist/allCoins.json', fileContents, 'utf8', () => {
+        fs.writeFile('gist/projects.json', fileContents, 'utf8', () => {
             console.log('All Assets File Write completed');
         });
+
+        // Update Github gist with new file contents
+        try {
+            let res = await updateGist(process.env.GIST_ID, data);
+            console.log(res);
+        } catch (error) {
+            console.log('Update gist failed: ' + error);
+        }
     }
 }
 
