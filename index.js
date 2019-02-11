@@ -16,7 +16,7 @@ async function init() {
 
     // Itereate over each asset and get it's detailed information.
     if (listOfAssets) {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 5; i++) {
             await sleep(500); // Throttle for api rate limits.
             let asset = await coingecko.getAssetData(listOfAssets[i].id);
             if (typeof asset !== 'undefined') {
@@ -26,14 +26,25 @@ async function init() {
         }
 
         // Write all assets to a local JSON file
-        var fileContents = JSON.stringify(filteredAssets, null, 2);
+        let fileContents = JSON.stringify(filteredAssets, null, 2);
         fs.writeFile('gist/projects.json', fileContents, 'utf8', () => {
             console.log('All Assets File Write completed');
         });
 
         // Update Github gist with new file contents
         try {
-            let result = await github.updateGist(process.env.GIST_ID, fileContents);
+            let result = await github.updateGist(process.env.GIST_ID, 'projects.json', fileContents);
+            console.log(result);
+        } catch (error) {
+            console.log(`Update gist failed: + ${error}`);
+        }
+
+        // Update Gist with new timestamp
+        let readMe = fs.readFileSync('gist/README.md').toString().split("\n");
+        readMe.splice(3, 1, `> Last Updated: ${new Date().toLocaleString()}`);
+        let amendedContents = readMe.join("\n");
+        try {
+            let result = await github.updateGist(process.env.GIST_ID, 'README.md', amendedContents);
             console.log(result);
         } catch (error) {
             console.log(`Update gist failed: + ${error}`);

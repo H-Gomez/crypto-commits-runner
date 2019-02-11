@@ -1,8 +1,8 @@
 # Crypto Repositories
 An updated list of cryptocurrency projects and their associated Github repositories and developer statistics. 
 
-> Last Updated: 29th January 2019.
-  
+> Last Updated: 2019-2-11 12:17:34
+
 The `allProjects.json` file contains a list of projects in the following structure:
 
 ```

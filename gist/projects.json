@@ -88,45 +88,5 @@
       "pull_request_contributors": 7,
       "commit_count_4_weeks": 191
     }
-  },
-  {
-    "id": "1337",
-    "name": "1337",
-    "symbol": "1337",
-    "sectors": [],
-    "country_origin": "",
-    "repos": [
-      "https://github.com/Velvet78/1337"
-    ],
-    "developer_data": {
-      "forks": 11,
-      "stars": 6,
-      "subscribers": 6,
-      "total_issues": 4,
-      "closed_issues": 1,
-      "pull_requests_merged": 8,
-      "pull_request_contributors": 4,
-      "commit_count_4_weeks": 0
-    }
-  },
-  {
-    "id": "1world",
-    "name": "1World",
-    "symbol": "1wo",
-    "sectors": [],
-    "country_origin": "",
-    "repos": [
-      "https://github.com/1World-Online/1WO-token-contract"
-    ],
-    "developer_data": {
-      "forks": 0,
-      "stars": 1,
-      "subscribers": 1,
-      "total_issues": 0,
-      "closed_issues": 0,
-      "pull_requests_merged": 0,
-      "pull_request_contributors": 0,
-      "commit_count_4_weeks": 0
-    }
   }
 ]
