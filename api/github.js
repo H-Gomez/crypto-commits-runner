@@ -62,11 +62,13 @@ function updateGist(id, filename, dataset) {
         request(url, options, (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 resolve(body);
-            } else {
+            } else if (error) {
                 reject(error);
+            } else {
+                reject(`${response.statusCode} : ${body.message}`);
             }
         });
-    }).catch(err => console.log(err));
+    });
 }
 
 module.exports = {
