@@ -2,8 +2,9 @@
 An updated list of cryptocurrency projects and their associated Github repositories and developer statistics. 
 
 > Last Updated: 2019-2-11 12:17:34
+> Projects: 
 
-The `allProjects.json` file contains a list of projects in the following structure:
+The `allProjects.json` file contains a compressed list of crypto projects. Once expanded it will be in the following structure:
 
 ```
 {
