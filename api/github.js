@@ -57,7 +57,7 @@ function updateGist(id, dataset) {
             },
             json: gistObject
         };
-    
+        console.log('Trying gist update');
         request(url, options, (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 resolve(body);

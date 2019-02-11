@@ -1,0 +1,132 @@
+[
+  {
+    "id": "01coin",
+    "name": "01coin",
+    "symbol": "zoc",
+    "sectors": [
+      "Masternodes"
+    ],
+    "country_origin": "",
+    "repos": [
+      "https://github.com/zocteam/zeroonecoin"
+    ],
+    "developer_data": {
+      "forks": 7,
+      "stars": 6,
+      "subscribers": 5,
+      "total_issues": 7,
+      "closed_issues": 3,
+      "pull_requests_merged": 19,
+      "pull_request_contributors": 4,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "02-token",
+    "name": "O2 Token",
+    "symbol": "o2t",
+    "sectors": [],
+    "country_origin": "",
+    "repos": [
+      "https://github.com/o2token/o2token"
+    ],
+    "developer_data": {
+      "forks": 0,
+      "stars": 0,
+      "subscribers": 0,
+      "total_issues": 0,
+      "closed_issues": 0,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "0x",
+    "name": "0x",
+    "symbol": "zrx",
+    "sectors": [
+      "Protocol"
+    ],
+    "country_origin": "US",
+    "repos": [
+      "https://github.com/0xProject/0x-monorepo",
+      "https://github.com/0xProject/0x-starter-project",
+      "https://github.com/0xProject/0x-launch-kit",
+      "https://github.com/0xProject/ZEIPs"
+    ],
+    "developer_data": {
+      "forks": 290,
+      "stars": 972,
+      "subscribers": 90,
+      "total_issues": 246,
+      "closed_issues": 218,
+      "pull_requests_merged": 1026,
+      "pull_request_contributors": 52,
+      "commit_count_4_weeks": 395
+    }
+  },
+  {
+    "id": "0xcert",
+    "name": "0xcert",
+    "symbol": "zxc",
+    "sectors": [
+      "Protocol"
+    ],
+    "country_origin": "SI",
+    "repos": [
+      "https://github.com/0xcert/ethereum-erc721",
+      "https://github.com/0xcert/framework"
+    ],
+    "developer_data": {
+      "forks": 10,
+      "stars": 51,
+      "subscribers": 13,
+      "total_issues": 41,
+      "closed_issues": 27,
+      "pull_requests_merged": 282,
+      "pull_request_contributors": 7,
+      "commit_count_4_weeks": 191
+    }
+  },
+  {
+    "id": "1337",
+    "name": "1337",
+    "symbol": "1337",
+    "sectors": [],
+    "country_origin": "",
+    "repos": [
+      "https://github.com/Velvet78/1337"
+    ],
+    "developer_data": {
+      "forks": 11,
+      "stars": 6,
+      "subscribers": 6,
+      "total_issues": 4,
+      "closed_issues": 1,
+      "pull_requests_merged": 8,
+      "pull_request_contributors": 4,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "1world",
+    "name": "1World",
+    "symbol": "1wo",
+    "sectors": [],
+    "country_origin": "",
+    "repos": [
+      "https://github.com/1World-Online/1WO-token-contract"
+    ],
+    "developer_data": {
+      "forks": 0,
+      "stars": 1,
+      "subscribers": 1,
+      "total_issues": 0,
+      "closed_issues": 0,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 0
+    }
+  }
+]
