@@ -16,9 +16,9 @@ async function init() {
 
     // Itereate over each asset and get it's detailed information. Throttled using sleep.
     if (listOfAssets) {
-        for (let i = 0; i < 5; i += 1) {
-            await sleep(500); // eslint-disable-line 
-            const asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line 
+        for (let i = 0; i < 25; i += 1) {
+            await sleep(500); // eslint-disable-line
+            const asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
             if (typeof asset !== 'undefined') {
                 filteredAssets.push(asset);
                 console.log(`Completed fetch for: ${listOfAssets[i].id}`);

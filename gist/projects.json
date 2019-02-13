@@ -57,13 +57,13 @@
     ],
     "developer_data": {
       "forks": 290,
-      "stars": 972,
+      "stars": 973,
       "subscribers": 90,
-      "total_issues": 246,
-      "closed_issues": 218,
-      "pull_requests_merged": 1026,
+      "total_issues": 247,
+      "closed_issues": 219,
+      "pull_requests_merged": 1028,
       "pull_request_contributors": 52,
-      "commit_count_4_weeks": 395
+      "commit_count_4_weeks": 304
     }
   },
   {
@@ -80,13 +80,263 @@
     ],
     "developer_data": {
       "forks": 10,
-      "stars": 51,
+      "stars": 54,
       "subscribers": 13,
       "total_issues": 45,
-      "closed_issues": 27,
-      "pull_requests_merged": 285,
-      "pull_request_contributors": 7,
-      "commit_count_4_weeks": 197
+      "closed_issues": 38,
+      "pull_requests_merged": 308,
+      "pull_request_contributors": 8,
+      "commit_count_4_weeks": 252
+    }
+  },
+  {
+    "id": "1337",
+    "name": "1337",
+    "symbol": "1337",
+    "sectors": [],
+    "country_origin": "",
+    "repos": [
+      "https://github.com/Velvet78/1337"
+    ],
+    "developer_data": {
+      "forks": 11,
+      "stars": 6,
+      "subscribers": 6,
+      "total_issues": 4,
+      "closed_issues": 1,
+      "pull_requests_merged": 8,
+      "pull_request_contributors": 4,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "1world",
+    "name": "1World",
+    "symbol": "1wo",
+    "sectors": [],
+    "country_origin": "",
+    "repos": [
+      "https://github.com/1World-Online/1WO-token-contract"
+    ],
+    "developer_data": {
+      "forks": 0,
+      "stars": 1,
+      "subscribers": 1,
+      "total_issues": 0,
+      "closed_issues": 0,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "1x2-coin",
+    "name": "1X2 Coin",
+    "symbol": "1x2",
+    "sectors": [],
+    "country_origin": "GB",
+    "repos": [
+      "https://github.com/1X2coin/1X2coin"
+    ],
+    "developer_data": {
+      "forks": 1,
+      "stars": 2,
+      "subscribers": 2,
+      "total_issues": 0,
+      "closed_issues": 0,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "2acoin",
+    "name": "2ACoin",
+    "symbol": "arms",
+    "sectors": [
+      "Sports"
+    ],
+    "country_origin": "US",
+    "repos": [
+      "https://github.com/2acoin/2acoin"
+    ],
+    "developer_data": {
+      "forks": 1,
+      "stars": 0,
+      "subscribers": 0,
+      "total_issues": 0,
+      "closed_issues": 0,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 9
+    }
+  },
+  {
+    "id": "2give",
+    "name": "2GIVE",
+    "symbol": "2give",
+    "sectors": [],
+    "country_origin": "",
+    "repos": [
+      "https://github.com/LittleDuke/2GIVE"
+    ],
+    "developer_data": {
+      "forks": 8,
+      "stars": 10,
+      "subscribers": 7,
+      "total_issues": 11,
+      "closed_issues": 1,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "300cubits",
+    "name": "300cubits",
+    "symbol": "teu",
+    "sectors": [
+      "Infrastructure"
+    ],
+    "country_origin": "HK",
+    "repos": [
+      "https://github.com/300cubits/ICO"
+    ],
+    "developer_data": {
+      "forks": 0,
+      "stars": 0,
+      "subscribers": 1,
+      "total_issues": 0,
+      "closed_issues": 0,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "404",
+    "name": "404",
+    "symbol": "404",
+    "sectors": [],
+    "country_origin": "US",
+    "repos": [
+      "https://github.com/michnkeks/404-Coin"
+    ],
+    "developer_data": {
+      "forks": 0,
+      "stars": 0,
+      "subscribers": 0,
+      "total_issues": 0,
+      "closed_issues": 0,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "42-coin",
+    "name": "42-coin",
+    "symbol": "42",
+    "sectors": [],
+    "country_origin": "",
+    "repos": [
+      "https://github.com/42-coin/42"
+    ],
+    "developer_data": {
+      "forks": 9,
+      "stars": 15,
+      "subscribers": 9,
+      "total_issues": 2,
+      "closed_issues": 2,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 2
+    }
+  },
+  {
+    "id": "4a-coin",
+    "name": "4A Coin",
+    "symbol": "4ac",
+    "sectors": [
+      "Cryptocurrency"
+    ],
+    "country_origin": "TR",
+    "repos": [
+      "https://github.com/4acoin/4acoin"
+    ],
+    "developer_data": {
+      "forks": 3,
+      "stars": 20,
+      "subscribers": 5,
+      "total_issues": 0,
+      "closed_issues": 0,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "4new",
+    "name": "4New",
+    "symbol": "kwatt",
+    "sectors": [
+      "Energy"
+    ],
+    "country_origin": "GB",
+    "repos": [
+      "https://github.com/muditgrover/4new-crowdsale"
+    ],
+    "developer_data": {
+      "forks": 2,
+      "stars": 5,
+      "subscribers": 3,
+      "total_issues": 0,
+      "closed_issues": 0,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "4xbit",
+    "name": "4xBit",
+    "symbol": "4xb",
+    "sectors": [
+      "Gambling"
+    ],
+    "country_origin": "US",
+    "repos": [
+      "https://github.com/mybtcfx/4xbitcoin"
+    ],
+    "developer_data": {
+      "forks": 0,
+      "stars": 0,
+      "subscribers": 0,
+      "total_issues": 0,
+      "closed_issues": 0,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 0
+    }
+  },
+  {
+    "id": "808coin",
+    "name": "808Coin",
+    "symbol": "808",
+    "sectors": [],
+    "country_origin": "",
+    "repos": [
+      "https://github.com/maxxine/808"
+    ],
+    "developer_data": {
+      "forks": 11,
+      "stars": 3,
+      "subscribers": 5,
+      "total_issues": 1,
+      "closed_issues": 1,
+      "pull_requests_merged": 0,
+      "pull_request_contributors": 0,
+      "commit_count_4_weeks": 11
     }
   }
 ]

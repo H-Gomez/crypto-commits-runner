@@ -61,7 +61,7 @@ function updateGist(id, filename, dataset) {
 
         request(url, options, (error, response, body) => {
             if (!error && response.statusCode === 200) {
-                resolve(body);
+                resolve('Gist updated.');
             } else if (error) {
                 reject(error);
             } else {
