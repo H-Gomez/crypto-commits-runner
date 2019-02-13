@@ -5,7 +5,7 @@ const github = require('./api/github');
 
 async function init() {
     let listOfAssets = [];
-    let filteredAssets = [];
+    const filteredAssets = [];
 
     // Get updated list of crypto assets from the API endpoint.
     try {
@@ -18,7 +18,7 @@ async function init() {
     if (listOfAssets) {
         for (let i = 0; i < 5; i++) {
             await sleep(500); // Throttle for api rate limits.
-            let asset = await coingecko.getAssetData(listOfAssets[i].id);
+            const asset = await coingecko.getAssetData(listOfAssets[i].id);
             if (typeof asset !== 'undefined') {
                 filteredAssets.push(asset);
                 console.log(`Completed fetch for: ${listOfAssets[i].id}`);
@@ -26,7 +26,7 @@ async function init() {
         }
 
         // Write all assets to a local JSON file
-        let fileContents = JSON.stringify(filteredAssets, null, 2);
+        const fileContents = JSON.stringify(filteredAssets, null, 2);
         fs.writeFile('gist/projects.json', fileContents, 'utf8', () => {
             console.log('All Assets File Write completed');
         });
@@ -34,7 +34,7 @@ async function init() {
         // Update Github gist with new file contents
         if (process.env.GIST_ID.length && process.env.GITHUB_TOKEN) {
             try {
-                let result = await github.updateGist(process.env.GIST_ID, 'projects.json', fileContents);
+                const result = await github.updateGist(process.env.GIST_ID, 'projects.json', fileContents);
                 console.log(result);
             } catch (error) {
                 console.log(`-- Update gist failed: ${error}`);
@@ -44,15 +44,15 @@ async function init() {
         }
 
         // Update Gist with new timestamp from README template.
-        let readMe = fs
+        const readMe = fs
             .readFileSync('gist/README.md')
             .toString()
             .split('\n');
         readMe.splice(3, 1, `> Last Updated: ${new Date().toLocaleString()} \n`);
         readMe.splice(4, 1, `\n > Projects: ${filteredAssets.length}`);
-        let amendedContents = readMe.join('\n');
+        const amendedContents = readMe.join('\n');
         try {
-            let result = await github.updateGist(process.env.GIST_ID, 'README.md', amendedContents);
+            const result = await github.updateGist(process.env.GIST_ID, 'README.md', amendedContents);
             console.log(result);
         } catch (error) {
             console.log(`-- Update gist failed: ${error}`);

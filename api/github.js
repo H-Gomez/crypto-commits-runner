@@ -9,7 +9,7 @@ function getGist(id) {
     return new Promise((resolve, reject) => {
         const url = process.env.GITHUB_GIST_URL + id;
         const options = {
-            headers: { 'user-agent': 'node.js' }
+            headers: { 'user-agent': 'node.js' },
         };
 
         request(url, options, (error, response, body) => {
@@ -45,18 +45,18 @@ function updateGist(id, filename, dataset) {
             description: 'Crypto Developer Repositories',
             files: {
                 [filename]: {
-                    content: dataset
-                }
-            }
+                    content: dataset,
+                },
+            },
         };
 
         const options = {
             method: 'PATCH',
             headers: {
                 'user-agent': 'node.js',
-                Authorization: 'token ' + process.env.GITHUB_TOKEN
+                Authorization: `token ${process.env.GITHUB_TOKEN}`,
             },
-            json: gistObject
+            json: gistObject,
         };
 
         request(url, options, (error, response, body) => {
@@ -72,6 +72,6 @@ function updateGist(id, filename, dataset) {
 }
 
 module.exports = {
-    getGist: getGist,
-    updateGist: updateGist
+    getGist,
+    updateGist,
 };

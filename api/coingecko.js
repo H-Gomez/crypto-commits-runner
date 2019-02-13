@@ -1,7 +1,6 @@
 /* Functionality for interacting with the CoinGecko API */
 require('dotenv').config();
 const request = require('request');
-const fs = require('fs');
 
 /**
  * Gets the raw JSON from the API endpoint for an individual crypto asset.
@@ -9,10 +8,10 @@ const fs = require('fs');
  */
 function getAssetData(asset) {
     return new Promise((resolve, reject) => {
-        let url = `${process.env.API_URL_COINS}${asset}${process.env.API_OPTIONS}`;
+        const url = `${process.env.API_URL_COINS}${asset}${process.env.API_OPTIONS}`;
         request(url, (error, response, body) => {
             if (!error && response.statusCode === 200) {
-                let json = JSON.parse(body);
+                const json = JSON.parse(body);
 
                 if (!json.links) {
                     reject(`--No links available for ${json.name}`);
@@ -22,18 +21,17 @@ function getAssetData(asset) {
                     reject(`--No Github Repos found for ${json.name}`);
                 }
 
-                let asset = {
+                const assetObject = {
                     id: json.id,
                     name: json.name,
                     symbol: json.symbol,
-                    name: json.name,
                     sectors: json.categories,
                     country_origin: json.country_origin,
                     repos: json.links.repos_url.github,
-                    developer_data: json.developer_data
+                    developer_data: json.developer_data,
                 };
 
-                resolve(asset);
+                resolve(assetObject);
             } else {
                 reject(`-- Unable to get data for coin: ${asset} | StatusCode: ${response.statusCode}`);
             }
@@ -48,7 +46,7 @@ function getAssetData(asset) {
 function getAllAssets() {
     return new Promise((resolve, reject) => {
         request(process.env.API_URL_LIST, (error, response, body) => {
-            let json = JSON.parse(body);
+            const json = JSON.parse(body);
             if (!error & (response.statusCode === 200)) {
                 resolve(json);
             } else {
@@ -61,6 +59,6 @@ function getAllAssets() {
 }
 
 module.exports = {
-    getAssetData: getAssetData,
-    getAllAssets: getAllAssets
+    getAssetData,
+    getAllAssets,
 };
