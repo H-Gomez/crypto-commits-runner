@@ -16,7 +16,7 @@ async function init() {
 
     // Itereate over each asset and get it's detailed information. Throttled using sleep.
     if (listOfAssets) {
-        for (let i = 0; i < 25; i += 1) {
+        for (let i = 0; i < listOfAssets.length; i += 1) {
             await sleep(500); // eslint-disable-line
             const asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
             if (typeof asset !== 'undefined') {
@@ -26,7 +26,7 @@ async function init() {
         }
 
         // Write all assets to a local JSON file
-        const fileContents = JSON.stringify(filteredAssets, null, 2);
+        const fileContents = JSON.stringify(filteredAssets);
         fs.writeFile('gist/projects.json', fileContents, 'utf8', () => {
             console.log('All Assets File Write completed');
         });
