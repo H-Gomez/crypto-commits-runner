@@ -33,11 +33,11 @@ function getGist(id) {
 function updateGist(id, filename, dataset) {
     return new Promise((resolve, reject) => {
         if (!typeof dataset === Object) {
-            reject('Dataset is not a JSON object');
+            reject(new Error('Dataset is not a JSON object'));
         }
 
         if (Object.keys(dataset).length === 0) {
-            reject('JSON given as param is emtpy.');
+            reject(new Error('JSON given as param is emtpy.'));
         }
 
         const url = process.env.GITHUB_GIST_URL + id;
@@ -65,7 +65,7 @@ function updateGist(id, filename, dataset) {
             } else if (error) {
                 reject(error);
             } else {
-                reject(`${response.statusCode} : ${body.message}`);
+                reject(new Error(`${response.statusCode} : ${body.message}`));
             }
         });
     });

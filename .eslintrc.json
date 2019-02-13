@@ -3,6 +3,7 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "max-len": ["error", 140]
+    "max-len": ["error", 120],
+    "no-console": "off"
   }
 }

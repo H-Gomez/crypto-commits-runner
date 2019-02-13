@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "standard": "standard"
+    "lint": "./node_modules/.bin/eslint ."
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,6 @@
   "homepage": "https://github.com/H-Gomez/crypto-commits-runner#readme",
   "dependencies": {
     "dotenv": "^6.2.0",
-    "prettier": "^1.16.4",
     "request": "^2.88.0"
   },
   "devDependencies": {
@@ -29,5 +28,11 @@
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-prettier": "^3.0.1"
+  },
+  "dependenciesComments": {
+    "eslint-plugin-prettier": "The plugin allows Prettier violations to be reported as ESLint errors",
+    "eslint-config-airbnb-base": "AirBnBs sharable ESLint configuration and coding style guide.",
+    "eslint-config-prettier": "Turns off all ESLint rules that are unnecessary or might conflict with Prettier.",
+    "eslint-plugin-import": "Intends to support linting of ES2015+ (ES6+) import/export syntax. Required by AirBnB Base"
   }
 }

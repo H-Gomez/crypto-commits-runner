@@ -14,11 +14,11 @@ function getAssetData(asset) {
                 const json = JSON.parse(body);
 
                 if (!json.links) {
-                    reject(`--No links available for ${json.name}`);
+                    reject(new Error(`--No links available for ${json.name}`));
                 }
 
                 if (json.links.repos_url.github.length === 0) {
-                    reject(`--No Github Repos found for ${json.name}`);
+                    reject(new Error(`--No Github Repos found for ${json.name}`));
                 }
 
                 const assetObject = {
@@ -33,7 +33,7 @@ function getAssetData(asset) {
 
                 resolve(assetObject);
             } else {
-                reject(`-- Unable to get data for coin: ${asset} | StatusCode: ${response.statusCode}`);
+                reject(new Error(`-- Unable to get data for coin: ${asset} | StatusCode: ${response.statusCode}`));
             }
         });
     }).catch(err => console.log(err));
@@ -47,10 +47,10 @@ function getAllAssets() {
     return new Promise((resolve, reject) => {
         request(process.env.API_URL_LIST, (error, response, body) => {
             const json = JSON.parse(body);
-            if (!error & (response.statusCode === 200)) {
+            if (!error && response.statusCode === 200) {
                 resolve(json);
             } else {
-                reject(`-- Unable to get list of all assets from API. | StatusCode: ${response.statusCode}`);
+                reject(new Error(`-- Unable to get list of all assets from API. | StatusCode: ${response.statusCode}`));
             }
         });
     }).catch(err => {
