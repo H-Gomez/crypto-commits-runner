@@ -71,6 +71,13 @@ function updateGist(id, filename, dataset) {
     });
 }
 
+function filterUsernameFromRepo(repo) {
+    repo = 'https://github.com/zcoinofficial/zcoin';
+    //https://api.github.com/users/username/repos
+
+    const username = repo.split('/');
+}
+
 module.exports = {
     getGist,
     updateGist,
