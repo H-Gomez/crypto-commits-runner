@@ -7,7 +7,7 @@ const request = require('request');
  */
 function getGist(id) {
     return new Promise((resolve, reject) => {
-        const url = process.env.GITHUB_GIST_URL + id;
+        const url = `${process.env.GITHUB_GIST_URL}${id}`;
         const options = {
             headers: { 'user-agent': 'node.js' },
         };
@@ -40,7 +40,7 @@ function updateGist(id, filename, dataset) {
             reject(new Error('JSON given as param is emtpy.'));
         }
 
-        const url = process.env.GITHUB_GIST_URL + id;
+        const url = `${process.env.GITHUB_GIST_URL}${id}`;
         const gistObject = {
             description: 'Crypto Developer Repositories',
             files: {
