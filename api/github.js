@@ -71,11 +71,47 @@ function updateGist(id, filename, dataset) {
     });
 }
 
+/**
+ * Takes in an Github repository URL and extracts the username from it then returns
+ * that username as a string.
+ * @param {string} repo
+ * @returns {string} username
+ */
 function filterUsernameFromRepo(repo) {
-    repo = 'https://github.com/zcoinofficial/zcoin';
-    //https://api.github.com/users/username/repos
+    if (!repo || typeof repo !== 'string') {
+        console.log('No URL was passed in to filter');
+        return;
+    }
 
-    const username = repo.split('/');
+    const stringArray = repo.split('/');
+
+    if (stringArray[2] !== 'github.com') {
+        console.log('The URL is not a Github URL');
+        return;
+    }
+
+    return stringArray[3];
+}
+
+/**
+ * Gets all public Github repositories for a given username and returns an array.
+ * @param {string} username 
+ * @returns {array} repositories
+ */
+function getRepositoriesForUser(username) {
+    const repositories;
+    const url = `https://api.github.com/users/${username}/repos`;
+    const options = {
+        headers: { 'user-agent': 'node.js' },
+    };
+
+    request(url, options, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+            return body
+        } else {
+            console.error(`${response.statusCode} : ${body.message}`);
+        }
+    });
 }
 
 module.exports = {
