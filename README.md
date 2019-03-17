@@ -38,3 +38,5 @@ Each crypto project object will have the following structure:
 
 > Data is sourced from Coingecko which has an API rate limit of 300 calls/minute so the requests are throttled. 
 
+## Deployment
+Current being hosted on Heroku basic dyno with the Scheduler add-on installed. This is set to run `index.js` at 00:30 every day. 
