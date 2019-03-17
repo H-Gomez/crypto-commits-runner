@@ -106,7 +106,8 @@ function getRepositoriesForUser(username) {
 
     request(url, options, (error, response, body) => {
         if (!error && response.statusCode === 200) {
-            return JSON.parse(body);
+            let json = JSON.parse(body);
+            return json;
         } else {
             console.error(`${response.statusCode} : ${body.message}`);
         }
