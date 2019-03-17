@@ -96,18 +96,17 @@ function filterUsernameFromRepo(repo) {
 /**
  * Gets all public Github repositories for a given username and returns an array.
  * @param {string} username 
- * @returns {array} repositories
+ * @returns repositories
  */
 function getRepositoriesForUser(username) {
-    const repositories;
-    const url = `https://api.github.com/users/${username}/repos`;
+    const url = `https://api.github.com/users/${username}/repos?per_page=100`;
     const options = {
         headers: { 'user-agent': 'node.js' },
     };
 
     request(url, options, (error, response, body) => {
         if (!error && response.statusCode === 200) {
-            return body
+            return JSON.parse(body);
         } else {
             console.error(`${response.statusCode} : ${body.message}`);
         }
@@ -117,4 +116,6 @@ function getRepositoriesForUser(username) {
 module.exports = {
     getGist,
     updateGist,
+    filterUsernameFromRepo,
+    getRepositoriesForUser
 };
