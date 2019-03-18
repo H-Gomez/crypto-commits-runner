@@ -26,6 +26,15 @@ function usersTotalCommits(){
 
 }
 
+function usersTotalWatchers() {
+    initialValue = 0;
+    const watchers = repositories.reduce(function(accumulator, currentValue) {
+        return accumulator + currentValue.watchers_count;
+    }, initialValue);
+
+    return watchers;
+}
+
 function usersTotalForks() {
 
 }
