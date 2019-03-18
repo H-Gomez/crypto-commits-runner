@@ -114,6 +114,28 @@ function getRepositoriesForUser(username) {
     });
 }
 
+/**
+ * Gets the commit statistics for a repository returned as a weekly count.
+ * @param {string} username 
+ * @param {string} repo
+ * @returns json
+ */
+function getCommitStatsForRepo(username, repo) {
+    const url = `https://api.github.com/repos/${username}/${repo}/stats/participation`;
+    const options = {
+        headers: { 'user-agent': 'node.js' },
+    };
+
+    request(url, options, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+            let json = JSON.parse(body);
+            return json;
+        } else {
+            console.error(`${response.statusCode} : ${body.message}`);
+        }
+    });
+}
+
 module.exports = {
     getGist,
     updateGist,
