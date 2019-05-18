@@ -4,7 +4,7 @@
   "description": "Simple NodeJS application which gets a list of crypto assets (coins and token) then checks each one for it's associated Github repositories. Intended to be run on a schedule.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node index.js",
     "lint": "./node_modules/.bin/eslint ."
   },
@@ -27,7 +27,9 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-prettier": "^3.0.1"
+    "eslint-plugin-prettier": "^3.0.1",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.1"
   },
   "dependenciesComments": {
     "eslint-plugin-prettier": "The plugin allows Prettier violations to be reported as ESLint errors",

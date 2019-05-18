@@ -5,9 +5,6 @@
 
 const github = require('./api/github');
 
-const repos = github.getRepositoriesForUser('zcoinofficial');
-console.log(repos);
-
 /**
  * Takes an array of repository objects for a user and returns the total number
  * of stars for that dataset.
@@ -22,9 +19,7 @@ function usersTotalStars(repositories) {
     return stars;
 }
 
-function usersTotalCommits(){
-
-}
+function usersTotalCommits() {}
 
 function usersTotalWatchers() {
     const initialValue = 0;
@@ -35,10 +30,6 @@ function usersTotalWatchers() {
     return watchers;
 }
 
-function usersTotalForks() {
+function usersTotalForks() {}
 
-}
-
-function usersTotalIssues() {
-
-}
+function usersTotalIssues() {}
