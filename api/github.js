@@ -14,7 +14,7 @@ function getGist(id) {
 
         request(url, options, (error, response, body) => {
             if (!error) {
-                resolve(body);
+                resolve(response);
             } else {
                 reject(error);
             }
