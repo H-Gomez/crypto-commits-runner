@@ -4,7 +4,7 @@ describe('Github API communications', () => {
     test('should get a gist from github API', () => {
         return github.getGist('137c9c481c8c5756519f991ade64253a').then(data => {
             expect(data).toBeDefined();
-        })
+        });
     });
 
     test('should load user repositories', () => {
