@@ -2,6 +2,30 @@ const sleep = require('util').promisify(setTimeout);
 const fs = require('fs');
 const coingecko = require('./api/coingecko');
 const github = require('./api/github');
+const githubStats = require('./lib/githubStats');
+
+/**
+ * Handles all of the Github stats collection when passed an asset object. Is responsible for
+ * identifying the owner of the asset's repositories then checking each one for it's respective
+ * stars, watchers, fork and issues.
+ * @param {object} asset
+ */
+function getStatsForAsset(asset) {
+    const username = github.filterUsernameFromRepo(asset.repos[0]);
+    github.getRepositoriesForUser(username).then(repos => {
+        const totalStars = githubStats.usersTotalStars(repos);
+        const totalWatches = githubStats.usersTotalWatchers(repos);
+        const totalIssues = githubStats.usersTotalIssues(repos);
+        const totalForks = githubStats.usersTotalForks(repos);
+        const repoStats = {
+            totalStars,
+            totalWatches,
+            totalIssues,
+            totalForks,
+        };
+        console.log(`Repo stats for ${asset.name} is ${JSON.stringify(repoStats)}`);
+    });
+}
 
 async function init() {
     let listOfAssets = [];
@@ -21,6 +45,7 @@ async function init() {
             const asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
             if (typeof asset !== 'undefined') {
                 filteredAssets.push(asset);
+                getStatsForAsset(asset);
                 console.log(`Completed fetch for: ${listOfAssets[i].id}`);
             }
         }

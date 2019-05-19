@@ -112,7 +112,7 @@ function getRepositoriesForUser(username) {
             } else if (error) {
                 reject(error);
             } else {
-                reject(new Error(`${response.statusCode} : broken ${body.message}`));
+                reject(new Error(`${response.statusCode} : ${body.message}`));
             }
         });
     });
@@ -125,17 +125,23 @@ function getRepositoriesForUser(username) {
  * @returns json
  */
 function getCommitStatsForRepo(username, repo) {
-    const url = `https://api.github.com/repos/${username}/${repo}/stats/participation`;
-    const options = {
-        headers: { 'user-agent': 'node.js' },
-    };
+    return new Promise((resolve, reject) => {
+        const url = `https://api.github.com/repos/${username}/${repo}/stats/participation`;
+        const options = {
+            headers: { 'user-agent': 'node.js' },
+        };
 
-    request(url, options, (error, response, body) => {
-        if (!error && response.statusCode === 200) {
-            const json = JSON.parse(body);
-            return json;
-        }
-        console.error(`${response.statusCode} : ${body.message}`);
+        request(url, options, (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+                const json = JSON.parse(body);
+                resolve(json);
+            }
+            if (error) {
+                reject(error);
+            } else {
+                reject(new Error(`${response.statusCode} : ${body.message}`));
+            }
+        });
     });
 }
 
@@ -144,4 +150,5 @@ module.exports = {
     updateGist,
     filterUsernameFromRepo,
     getRepositoriesForUser,
+    getCommitStatsForRepo,
 };
