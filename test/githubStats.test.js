@@ -164,22 +164,22 @@ const mockActivity = {
 
 describe('Github Stats', () => {
     test('should calculate the number of stars for repositories', () => {
-        expect(typeof githubStats.usersTotalStars(mockRepo)).toBe('number');
-        expect(githubStats.usersTotalStars(mockRepo)).toEqual(7);
+        expect(typeof githubStats.sumPropertyValues(mockRepo, 'stargazers_count')).toBe('number');
+        expect(githubStats.sumPropertyValues(mockRepo, 'stargazers_count')).toEqual(7);
     });
 
     test('should calculate the number of watchers for repositories', () => {
-        expect(typeof githubStats.usersTotalWatchers(mockRepo)).toBe('number');
-        expect(githubStats.usersTotalStars(mockRepo)).toEqual(7);
+        expect(typeof githubStats.sumPropertyValues(mockRepo, 'watchers_count')).toBe('number');
+        expect(githubStats.sumPropertyValues(mockRepo, 'watchers_count')).toEqual(7);
     });
 
     test('should calculate the number of forks for repositories', () => {
-        expect(typeof githubStats.usersTotalForks(mockRepo)).toBe('number');
-        expect(githubStats.usersTotalForks(mockRepo)).toEqual(2);
+        expect(typeof githubStats.sumPropertyValues(mockRepo, 'forks_count')).toBe('number');
+        expect(githubStats.sumPropertyValues(mockRepo, 'forks_count')).toEqual(2);
     });
 
     test('should calculate the number of issues for repositories', () => {
-        expect(typeof githubStats.usersTotalIssues(mockRepo)).toBe('number');
-        expect(githubStats.usersTotalIssues(mockRepo)).toEqual(7);
+        expect(typeof githubStats.sumPropertyValues(mockRepo, 'open_issues_count')).toBe('number');
+        expect(githubStats.sumPropertyValues(mockRepo, 'open_issues_count')).toEqual(7);
     });
 });

@@ -13,15 +13,12 @@ const githubStats = require('./lib/githubStats');
 function getStatsForAsset(asset) {
     const username = github.filterUsernameFromRepo(asset.repos[0]);
     github.getRepositoriesForUser(username).then(repos => {
-        const totalStars = githubStats.usersTotalStars(repos);
-        const totalWatches = githubStats.usersTotalWatchers(repos);
-        const totalIssues = githubStats.usersTotalIssues(repos);
-        const totalForks = githubStats.usersTotalForks(repos);
         const repoStats = {
-            totalStars,
-            totalWatches,
-            totalIssues,
-            totalForks,
+            totalRepos: repos.length,
+            totalStars: githubStats.sumPropertyValues(repos, 'stargazers_count'),
+            totalWatchers: githubStats.sumPropertyValues(repos, 'watchers_count'),
+            totalIssues: githubStats.sumPropertyValues(repos, 'open_issues_count'),
+            totalForks: githubStats.sumPropertyValues(repos, 'forks_count'),
         };
         console.log(`Repo stats for ${asset.name} is ${JSON.stringify(repoStats)}`);
     });
