@@ -182,4 +182,9 @@ describe('Github Stats', () => {
         expect(typeof githubStats.sumPropertyValues(mockRepo, 'open_issues_count')).toBe('number');
         expect(githubStats.sumPropertyValues(mockRepo, 'open_issues_count')).toEqual(7);
     });
+
+    test('should calculate the number of commits from commit history', () => {
+        expect(typeof githubStats.sumTotalCommits(mockActivity)).toBe('number');
+        expect(githubStats.sumTotalCommits(mockActivity)).toEqual(31);
+    });
 });
