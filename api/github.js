@@ -102,7 +102,7 @@ function getRepositoriesForUser(username) {
     return new Promise((resolve, reject) => {
         const url = `https://api.github.com/users/${username}/repos?per_page=100`;
         const options = {
-            headers: { 'user-agent': 'node.js' },
+            headers: { 'user-agent': 'node.js', Authorization: `Token ${process.env.GITHUB_RATE_TOKEN}` },
         };
 
         request(url, options, (error, response, body) => {
@@ -112,7 +112,7 @@ function getRepositoriesForUser(username) {
             } else if (error) {
                 reject(error);
             } else {
-                reject(new Error(`${response.statusCode} : ${body.message}`));
+                reject(new Error(`${response.statusCode} : ${body}`));
             }
         });
     });
@@ -128,15 +128,14 @@ function getCommitStatsForRepo(username, repo) {
     return new Promise((resolve, reject) => {
         const url = `https://api.github.com/repos/${username}/${repo}/stats/participation`;
         const options = {
-            headers: { 'user-agent': 'node.js' },
+            headers: { 'user-agent': 'node.js', Authorization: `Token ${process.env.GITHUB_RATE_TOKEN}` },
         };
 
         request(url, options, (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 const json = JSON.parse(body);
                 resolve(json);
-            }
-            if (error) {
+            } else if (error) {
                 reject(error);
             } else {
                 reject(new Error(`${response.statusCode} : ${body.message}`));
