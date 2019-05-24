@@ -10,18 +10,33 @@ const githubStats = require('./lib/githubStats');
  * stars, watchers, fork and issues.
  * @param {object} asset
  */
-function getStatsForAsset(asset) {
+async function getStatsForAsset(asset) {
     const username = github.filterUsernameFromRepo(asset.repos[0]);
-    github.getRepositoriesForUser(username).then(repos => {
-        const repoStats = {
-            totalRepos: repos.length,
-            totalStars: githubStats.sumPropertyValues(repos, 'stargazers_count'),
-            totalWatchers: githubStats.sumPropertyValues(repos, 'watchers_count'),
-            totalIssues: githubStats.sumPropertyValues(repos, 'open_issues_count'),
-            totalForks: githubStats.sumPropertyValues(repos, 'forks_count'),
-        };
-        console.log(`Repo stats for ${asset.name} is ${JSON.stringify(repoStats)}`);
+    const repos = await github.getRepositoriesForUser(username);
+    const allCommitHistories = [];
+    let totalCommits = 0;
+
+    // Loop over each repository item in the array and get it's commit history from github
+    for (let y = 0; y < repos.length; y += 1) {
+        allCommitHistories.push(github.getCommitStatsForRepo(username, repos[y].name));
+    }
+
+    await Promise.all(allCommitHistories).then(data => {
+        totalCommits = data.reduce((accumulator, currentValue) => {
+            return accumulator + githubStats.sumTotalCommits(currentValue.all);
+        }, 0);
     });
+
+    const repoStats = {
+        totalCommits,
+        totalRepos: repos.length,
+        totalStars: githubStats.sumPropertyValues(repos, 'stargazers_count'),
+        totalWatchers: githubStats.sumPropertyValues(repos, 'watchers_count'),
+        totalIssues: githubStats.sumPropertyValues(repos, 'open_issues_count'),
+        totalForks: githubStats.sumPropertyValues(repos, 'forks_count'),
+    };
+
+    console.log(`Repo stats for ${asset.name} is ${JSON.stringify(repoStats)}`);
 }
 
 async function init() {
@@ -37,7 +52,7 @@ async function init() {
 
     // Itereate over each asset and get it's detailed information. Throttled using sleep.
     if (listOfAssets) {
-        for (let i = 0; i < listOfAssets.length; i += 1) {
+        for (let i = 0; i < 2; i += 1) {
             await sleep(500); // eslint-disable-line
             const asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
             if (typeof asset !== 'undefined') {
