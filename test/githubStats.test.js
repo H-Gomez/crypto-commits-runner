@@ -106,60 +106,6 @@ const mockActivity = {
         0,
         2,
     ],
-    owner: [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        9,
-        12,
-        0,
-        0,
-        0,
-        2,
-        6,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        2,
-    ],
 };
 
 describe('Github Stats', () => {
@@ -184,7 +130,7 @@ describe('Github Stats', () => {
     });
 
     test('should calculate the number of commits from commit history', () => {
-        expect(typeof githubStats.sumTotalCommits(mockActivity)).toBe('number');
-        expect(githubStats.sumTotalCommits(mockActivity)).toEqual(31);
+        expect(typeof githubStats.sumTotalCommits(mockActivity.all)).toBe('number');
+        expect(githubStats.sumTotalCommits(mockActivity.all)).toEqual(31);
     });
 });
