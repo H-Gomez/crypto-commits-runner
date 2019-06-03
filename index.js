@@ -15,6 +15,7 @@ async function getStatsForAsset(asset) {
     const repos = await github.getRepositoriesForUser(username);
     const allCommitHistories = [];
     let totalCommits = 0;
+    const totalCommitHistory = 0;
 
     // Loop over each repository item in the array and get it's commit history from github
     for (let y = 0; y < repos.length; y += 1) {
@@ -27,6 +28,7 @@ async function getStatsForAsset(asset) {
         totalCommits = data.reduce((accumulator, currentValue) => {
             return accumulator + githubStats.sumTotalCommits(currentValue.all);
         }, 0);
+        combine(data);
     });
 
     const repoStats = {
@@ -54,7 +56,7 @@ async function init() {
 
     // Itereate over each asset and get it's detailed information. Throttled using sleep.
     if (listOfAssets) {
-        for (let i = 0; i < listOfAssets.length; i += 1) {
+        for (let i = 0; i < 5; i += 1) {
             await sleep(500); // eslint-disable-line
             const asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
             if (typeof asset !== 'undefined') {

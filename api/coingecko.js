@@ -50,11 +50,11 @@ function getAssetData(asset) {
 function getAllAssets() {
     return new Promise((resolve, reject) => {
         request(process.env.API_URL_LIST, (error, response, body) => {
-            const json = JSON.parse(body);
             if (!error && response.statusCode === 200) {
+                const json = JSON.parse(body);
                 resolve(json);
             } else {
-                reject(new Error(`-- Unable to get list of all assets from API. | StatusCode: ${response.statusCode}`));
+                reject(new Error(`-- Unable to get list of all assets from API. | Error: ${error}`));
             }
         });
     }).catch(err => {
