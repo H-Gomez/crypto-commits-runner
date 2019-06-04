@@ -12,7 +12,7 @@ function getGist(id) {
             headers: { 'user-agent': 'node.js' },
         };
 
-        request(url, options, (error, response, body) => {
+        request(url, options, (error, response) => {
             if (!error) {
                 resolve(response);
             } else {
@@ -80,14 +80,14 @@ function updateGist(id, filename, dataset) {
 function filterUsernameFromRepo(repo) {
     if (!repo || typeof repo !== 'string') {
         console.log('No URL was passed in to filter');
-        return;
+        return false;
     }
 
     const stringArray = repo.split('/');
 
     if (stringArray[2] !== 'github.com') {
         console.log('The URL is not a Github URL');
-        return;
+        return false;
     }
 
     return stringArray[3];

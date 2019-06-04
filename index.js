@@ -74,31 +74,31 @@ async function init() {
         });
 
         // Update Github gist with new file contents
-        // if (process.env.GIST_ID.length && process.env.GITHUB_TOKEN) {
-        //     try {
-        //         const result = await github.updateGist(process.env.GIST_ID, 'projects.json', fileContents);
-        //         console.log(result);
-        //     } catch (error) {
-        //         console.log(`-- Update gist failed: ${error}`);
-        //     }
-        // } else {
-        //     throw new Error('-- Skipping upload to Gist as not ID or token available.');
-        // }
+        if (process.env.GIST_ID.length && process.env.GITHUB_TOKEN) {
+            try {
+                const result = await github.updateGist(process.env.GIST_ID, 'projects.json', fileContents);
+                console.log(result);
+            } catch (error) {
+                console.log(`-- Update gist failed: ${error}`);
+            }
+        } else {
+            throw new Error('-- Skipping upload to Gist as not ID or token available.');
+        }
 
         // Update Gist with new timestamp from README template.
-        // const readMe = fs
-        //     .readFileSync('gist/README.md')
-        //     .toString()
-        //     .split('\n');
-        // readMe.splice(3, 1, `> Last Updated: ${new Date().toLocaleString()} \n`);
-        // readMe.splice(4, 1, `\n > Projects: ${filteredAssets.length}`);
-        // const amendedContents = readMe.join('\n');
-        // try {
-        //     const result = await github.updateGist(process.env.GIST_ID, 'README.md', amendedContents);
-        //     console.log(result);
-        // } catch (error) {
-        //     console.log(`-- Update gist failed: ${error}`);
-        // }
+        const readMe = fs
+            .readFileSync('gist/README.md')
+            .toString()
+            .split('\n');
+        readMe.splice(3, 1, `> Last Updated: ${new Date().toLocaleString()} \n`);
+        readMe.splice(4, 1, `\n > Projects: ${filteredAssets.length}`);
+        const amendedContents = readMe.join('\n');
+        try {
+            const result = await github.updateGist(process.env.GIST_ID, 'README.md', amendedContents);
+            console.log(result);
+        } catch (error) {
+            console.log(`-- Update gist failed: ${error}`);
+        }
     }
 }
 
