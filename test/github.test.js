@@ -16,4 +16,8 @@ describe('Github API communications', () => {
     test('should filter username from github url', () => {
         expect(github.filterUsernameFromRepo('https://github.com/nodejs/Release')).toEqual('nodejs');
     });
+
+    test('should get commit activity for a specific repository', () => {
+        expect(github.getCommitStatsForRepo('h-gomez', 'crypto-commits-runner')).toBeDefined();
+    });
 });
