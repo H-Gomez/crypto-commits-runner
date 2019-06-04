@@ -15,7 +15,7 @@ async function getStatsForAsset(asset) {
     const repos = await github.getRepositoriesForUser(username);
     const allCommitHistories = [];
     let totalCommits = 0;
-    const totalCommitHistory = 0;
+    let totalCommitHistory = 0;
 
     // Loop over each repository item in the array and get it's commit history from github
     for (let y = 0; y < repos.length; y += 1) {
@@ -28,16 +28,17 @@ async function getStatsForAsset(asset) {
         totalCommits = data.reduce((accumulator, currentValue) => {
             return accumulator + githubStats.sumTotalCommits(currentValue.all);
         }, 0);
-        combine(data);
+        totalCommitHistory = githubStats.sumCommitHistory(data);
     });
 
     const repoStats = {
-        totalCommits,
-        totalRepos: repos.length,
+        total_commits: totalCommits,
+        repos_count: repos.length,
         forks: githubStats.sumPropertyValues(repos, 'forks_count'),
         stars: githubStats.sumPropertyValues(repos, 'stargazers_count'),
         subscribers: githubStats.sumPropertyValues(repos, 'watchers_count'),
         total_issues: githubStats.sumPropertyValues(repos, 'open_issues_count'),
+        commit_history_52_weeks: totalCommitHistory,
     };
 
     return repoStats;
