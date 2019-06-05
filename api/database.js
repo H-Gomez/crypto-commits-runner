@@ -3,7 +3,7 @@ const mongodb = require('mongodb');
 
 function addAssetToDatabase(asset) {
     const MongoClient = mongodb.MongoClient;
-    const mongoUrl = process.env.Mongo_URL;
+    const mongoUrl = process.env.MONGO_URL;
 
     MongoClient.connect(mongoUrl, (error, client) => {
         if (error) {

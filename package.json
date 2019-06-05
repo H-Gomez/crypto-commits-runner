@@ -20,6 +20,7 @@
   "homepage": "https://github.com/H-Gomez/crypto-commits-runner#readme",
   "dependencies": {
     "dotenv": "^6.2.0",
+    "mongodb": "^3.2.7",
     "request": "^2.88.0"
   },
   "devDependencies": {
