@@ -12,7 +12,7 @@ const githubStats = require('./lib/githubStats');
  */
 async function getStatsForAsset(asset) {
     const username = github.filterUsernameFromRepo(asset.repos[0]);
-    const repos = await github.getRepositoriesForUser(username);
+    const repos = await github.getRepositoriesForUser(username).catch(err => console.log(err));
     const allCommitHistories = [];
     let totalCommits = 0;
     let totalCommitHistory = 0;
@@ -31,7 +31,8 @@ async function getStatsForAsset(asset) {
         totalCommitHistory = githubStats.sumCommitHistory(data);
     });
 
-    const repoStats = {
+    asset.repos = repos;
+    asset.developer_data = {
         total_commits: totalCommits,
         repos_count: repos.length,
         forks: githubStats.sumPropertyValues(repos, 'forks_count'),
@@ -41,7 +42,7 @@ async function getStatsForAsset(asset) {
         commit_history_52_weeks: totalCommitHistory,
     };
 
-    return repoStats;
+    return asset;
 }
 
 async function init() {
@@ -58,10 +59,10 @@ async function init() {
     // Itereate over each asset and get it's detailed information. Throttled using sleep.
     if (listOfAssets) {
         for (let i = 0; i < listOfAssets.length; i += 1) {
-            await sleep(500); // eslint-disable-line
-            const asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
+            await sleep(2000); // eslint-disable-line
+            let asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
             if (typeof asset !== 'undefined') {
-                asset.developer_data = await getStatsForAsset(asset); // eslint-disable-line
+                asset = await getStatsForAsset(asset); // eslint-disable-line
                 filteredAssets.push(asset);
                 console.log(`Completed fetch for: ${listOfAssets[i].id}`);
             }
@@ -74,31 +75,31 @@ async function init() {
         });
 
         // Update Github gist with new file contents
-        if (process.env.GIST_ID.length && process.env.GITHUB_TOKEN) {
-            try {
-                const result = await github.updateGist(process.env.GIST_ID, 'projects.json', fileContents);
-                console.log(result);
-            } catch (error) {
-                console.log(`-- Update gist failed: ${error}`);
-            }
-        } else {
-            throw new Error('-- Skipping upload to Gist as not ID or token available.');
-        }
+        // if (process.env.GIST_ID.length && process.env.GITHUB_TOKEN) {
+        //     try {
+        //         const result = await github.updateGist(process.env.GIST_ID, 'projects.json', fileContents);
+        //         console.log(result);
+        //     } catch (error) {
+        //         console.log(`-- Update gist failed: ${error}`);
+        //     }
+        // } else {
+        //     throw new Error('-- Skipping upload to Gist as not ID or token available.');
+        // }
 
         // Update Gist with new timestamp from README template.
-        const readMe = fs
-            .readFileSync('gist/README.md')
-            .toString()
-            .split('\n');
-        readMe.splice(3, 1, `> Last Updated: ${new Date().toLocaleString()} \n`);
-        readMe.splice(4, 1, `\n > Projects: ${filteredAssets.length}`);
-        const amendedContents = readMe.join('\n');
-        try {
-            const result = await github.updateGist(process.env.GIST_ID, 'README.md', amendedContents);
-            console.log(result);
-        } catch (error) {
-            console.log(`-- Update gist failed: ${error}`);
-        }
+        // const readMe = fs
+        //     .readFileSync('gist/README.md')
+        //     .toString()
+        //     .split('\n');
+        // readMe.splice(3, 1, `> Last Updated: ${new Date().toLocaleString()} \n`);
+        // readMe.splice(4, 1, `\n > Projects: ${filteredAssets.length}`);
+        // const amendedContents = readMe.join('\n');
+        // try {
+        //     const result = await github.updateGist(process.env.GIST_ID, 'README.md', amendedContents);
+        //     console.log(result);
+        // } catch (error) {
+        //     console.log(`-- Update gist failed: ${error}`);
+        // }
     }
 }
 

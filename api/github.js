@@ -112,7 +112,7 @@ function getRepositoriesForUser(username) {
             } else if (error) {
                 reject(error);
             } else {
-                reject(new Error(`${response.statusCode} : ${body}`));
+                reject(`${response.statusCode} : ${body}`);
             }
         });
     });
