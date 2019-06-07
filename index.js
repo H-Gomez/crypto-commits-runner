@@ -8,11 +8,9 @@ const githubStats = require('./lib/githubStats');
  * Handles all of the Github stats collection when passed an asset object. Is responsible for
  * identifying the owner of the asset's repositories then checking each one for it's respective
  * stars, watchers, fork and issues.
- * @param {object} asset
+ * @param {array} repos
  */
-async function getStatsForAsset(asset) {
-    const username = github.filterUsernameFromRepo(asset.repos[0]);
-    const repos = await github.getRepositoriesForUser(username).catch(err => console.log(err));
+async function getStatsForAsset(username, repos) {
     const allCommitHistories = [];
     let totalCommits = 0;
     let totalCommitHistory = 0;
@@ -31,8 +29,7 @@ async function getStatsForAsset(asset) {
         totalCommitHistory = githubStats.sumCommitHistory(data);
     });
 
-    asset.repos = repos;
-    asset.developer_data = {
+    const developer_data = {
         total_commits: totalCommits,
         repos_count: repos.length,
         forks: githubStats.sumPropertyValues(repos, 'forks_count'),
@@ -42,7 +39,7 @@ async function getStatsForAsset(asset) {
         commit_history_52_weeks: totalCommitHistory,
     };
 
-    return asset;
+    return developer_data;
 }
 
 async function init() {
@@ -62,9 +59,17 @@ async function init() {
             await sleep(2000); // eslint-disable-line
             let asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
             if (typeof asset !== 'undefined') {
-                asset = await getStatsForAsset(asset); // eslint-disable-line
-                filteredAssets.push(asset);
-                console.log(`Completed fetch for: ${listOfAssets[i].id}`);
+                const githubUsername = github.filterUsernameFromRepo(asset.repos[0]);
+                await github.getRepositoriesForUser(githubUsername).then(async (repos) => {
+                    asset.repos = repos;
+                    asset.developer_data = await getStatsForAsset(githubUsername, asset.repos); // eslint-disable-line
+                    filteredAssets.push(asset);
+                    console.log(`Completed fetch for: ${listOfAssets[i].id}`);
+                }).catch(error => {
+                    console.log(`Unable to complete ${asset.id} : ${error}`);
+                });
+            } else {
+                console.log(`---Skipped as undefined ${listOfAssets[i].id}`);
             }
         }
 
