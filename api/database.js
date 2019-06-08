@@ -7,7 +7,7 @@ function addAssetToDatabase(asset) {
 
     MongoClient.connect(mongoUrl, (error, client) => {
         if (error) {
-            console.log('Unable to connect to the database.');
+            console.log(`Unable to connect to the database: ${error}`);
         } else {
             console.log('Database connection established!');
             const db = client.db('crypto-commits');

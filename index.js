@@ -3,6 +3,7 @@ const fs = require('fs');
 const coingecko = require('./api/coingecko');
 const github = require('./api/github');
 const githubStats = require('./lib/githubStats');
+const db = require('./api/database');
 
 /**
  * Handles all of the Github stats collection when passed an asset object. Is responsible for
@@ -60,10 +61,11 @@ async function init() {
             let asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
             if (typeof asset !== 'undefined') {
                 const githubUsername = github.filterUsernameFromRepo(asset.repos[0]);
-                await github.getRepositoriesForUser(githubUsername).then(async (repos) => {
+                await github.getRepositoriesForUser(githubUsername).then(async (repos) => { 
                     asset.repos = repos;
                     asset.developer_data = await getStatsForAsset(githubUsername, asset.repos); // eslint-disable-line
                     filteredAssets.push(asset);
+                    db.addAssetToDatabase(asset);
                     console.log(`Completed fetch for: ${listOfAssets[i].id}`);
                 }).catch(error => {
                     console.log(`Unable to complete ${asset.id} : ${error}`);

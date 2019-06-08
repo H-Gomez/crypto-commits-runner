@@ -10,7 +10,7 @@ function getAssetData(asset) {
     return new Promise((resolve, reject) => {
         const url = `${process.env.API_URL_COINS}${asset}${process.env.API_OPTIONS}`;
         if (!url) {
-            console.log('No URL provided');
+            reject('No URL provided');
         }
 
         request(url, (error, response, body) => {
