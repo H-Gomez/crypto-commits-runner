@@ -47,6 +47,9 @@ async function init() {
     let listOfAssets = [];
     const filteredAssets = [];
 
+    // Connect to MongoDB
+    await db.connect().catch(message => new Error(message));
+
     // Get updated list of crypto assets from the API endpoint.
     try {
         listOfAssets = await coingecko.getAllAssets();
@@ -61,15 +64,18 @@ async function init() {
             let asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
             if (typeof asset !== 'undefined') {
                 const githubUsername = github.filterUsernameFromRepo(asset.repos[0]);
-                await github.getRepositoriesForUser(githubUsername).then(async (repos) => { 
-                    asset.repos = repos;
-                    asset.developer_data = await getStatsForAsset(githubUsername, asset.repos); // eslint-disable-line
-                    filteredAssets.push(asset);
-                    db.addAssetToDatabase(asset);
-                    console.log(`Completed fetch for: ${listOfAssets[i].id}`);
-                }).catch(error => {
-                    console.log(`Unable to complete ${asset.id} : ${error}`);
-                });
+                await github
+                    .getRepositoriesForUser(githubUsername)
+                    .then(async repos => {
+                        asset.repos = repos.map(repo => repo.html_url);
+                        asset.developer_data = await getStatsForAsset(githubUsername, asset.repos); // eslint-disable-line
+                        filteredAssets.push(asset);
+                        db.insertAsset(asset);
+                        console.log(`Completed fetch for: ${listOfAssets[i].id}`);
+                    })
+                    .catch(error => {
+                        console.log(`Unable to complete ${asset.id} : ${error}`);
+                    });
             } else {
                 console.log(`---Skipped as undefined ${listOfAssets[i].id}`);
             }
