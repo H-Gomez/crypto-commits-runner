@@ -21,6 +21,21 @@ function connect() {
 }
 
 /**
+ * Deletes all documents from the given collection.
+ */
+function deleteAllCollections() {
+    return new Promise((resolve, reject) => {
+        database.collection('assets').remove({}, (error, response) => {
+            if (error) {
+                reject(`-- Unable to delete all documents from collection: ${error}`);
+            } else {
+                resolve('All records deleted from collection.'); 
+            }
+        })
+    }).catch(err => new Error(err));
+}
+
+/**
  * Inserts a single asset object into the database.
  * @param {object} asset
  */
@@ -95,5 +110,6 @@ function closeDatabase() {
 module.exports = {
     connect,
     insertAsset,
-    updateAsset
+    updateAsset,
+    deleteAllCollections
 };

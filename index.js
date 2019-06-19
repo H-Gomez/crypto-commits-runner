@@ -49,6 +49,7 @@ async function init() {
 
     // Connect to MongoDB
     await db.connect().catch(message => new Error(message));
+    await db.deleteAllCollections();
 
     // Get updated list of crypto assets from the API endpoint.
     try {
@@ -60,7 +61,7 @@ async function init() {
     // Itereate over each asset and get it's detailed information. Throttled using sleep.
     if (listOfAssets) {
         for (let i = 0; i < listOfAssets.length; i += 1) {
-            await sleep(3000); // eslint-disable-line
+            await sleep(6000); // eslint-disable-line
             let asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
             if (typeof asset !== 'undefined') {
                 const githubUsername = github.filterUsernameFromRepo(asset.repos[0]);
