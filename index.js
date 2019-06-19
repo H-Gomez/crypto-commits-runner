@@ -67,8 +67,8 @@ async function init() {
                 await github
                     .getRepositoriesForUser(githubUsername)
                     .then(async repos => {
+                        asset.developer_data = await getStatsForAsset(githubUsername, repos); // eslint-disable-line
                         asset.repos = repos.map(repo => repo.html_url);
-                        asset.developer_data = await getStatsForAsset(githubUsername, asset.repos); // eslint-disable-line
                         filteredAssets.push(asset);
                         db.insertAsset(asset);
                         console.log(`Completed fetch for: ${listOfAssets[i].id}`);
