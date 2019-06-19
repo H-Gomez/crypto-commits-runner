@@ -54,7 +54,7 @@ async function init() {
     try {
         listOfAssets = await coingecko.getAllAssets();
     } catch (err) {
-        throw new Error('Unable to get list of assets from API');
+        throw new Error('Unable to get list of assets from API' + err);
     }
 
     // Itereate over each asset and get it's detailed information. Throttled using sleep.

@@ -40,7 +40,7 @@ function getAssetData(asset) {
                 reject(new Error(`-- Unable to get data for coin: ${asset} | StatusCode: ${response.statusCode}`));
             }
         });
-    }).catch(err => console.log(err.message));
+    });
 }
 
 /**
