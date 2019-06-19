@@ -40,7 +40,7 @@ function getAssetData(asset) {
                 reject(new Error(`-- Unable to get data for coin: ${asset} | StatusCode: ${response.statusCode}`));
             }
         });
-    });
+    }).catch(error => console.log(error));
 }
 
 /**
@@ -49,7 +49,8 @@ function getAssetData(asset) {
  */
 function getAllAssets() {
     return new Promise((resolve, reject) => {
-        if (process.env.API_URL_LIST) {
+        if (!process.env.API_URL_LIST) {
+            console.log(process.env.API_URL_LIST);
             reject('No URL found to get all Assets.');
         }
 
@@ -58,7 +59,7 @@ function getAllAssets() {
                 const json = JSON.parse(body);
                 resolve(json);
             } else {
-                reject(new Error(`-- Unable to get list of all assets from API. | Error: ${error}`));
+                reject(error);
             }
         });
     });

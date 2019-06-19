@@ -54,13 +54,13 @@ async function init() {
     try {
         listOfAssets = await coingecko.getAllAssets();
     } catch (err) {
-        throw new Error('Unable to get list of assets from Coingecko API' + err);
+        throw new Error(`Unable to get list of assets from Coingecko API. Reason: ${err}`);
     }
 
     // Itereate over each asset and get it's detailed information. Throttled using sleep.
     if (listOfAssets) {
         for (let i = 0; i < listOfAssets.length; i += 1) {
-            await sleep(2000); // eslint-disable-line
+            await sleep(3000); // eslint-disable-line
             let asset = await coingecko.getAssetData(listOfAssets[i].id); // eslint-disable-line
             if (typeof asset !== 'undefined') {
                 const githubUsername = github.filterUsernameFromRepo(asset.repos[0]);
