@@ -49,6 +49,10 @@ function getAssetData(asset) {
  */
 function getAllAssets() {
     return new Promise((resolve, reject) => {
+        if (process.env.API_URL_LIST) {
+            reject('No URL found to get all Assets.');
+        }
+
         request(process.env.API_URL_LIST, (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 const json = JSON.parse(body);
@@ -57,8 +61,6 @@ function getAllAssets() {
                 reject(new Error(`-- Unable to get list of all assets from API. | Error: ${error}`));
             }
         });
-    }).catch(err => {
-        throw new Error(err);
     });
 }
 
