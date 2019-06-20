@@ -18,11 +18,11 @@ function getAssetData(asset) {
                 const json = JSON.parse(body);
 
                 if (!json.links) {
-                    reject(new Error(`--No links available for ${json.name}`));
+                    reject(`-- No links available for ${json.name}`);
                 }
 
                 if (json.links.repos_url.github.length === 0) {
-                    reject(new Error(`--No Github Repos found for ${json.name}`));
+                    reject(`-- No Github Repos found for ${json.name}`);
                 }
 
                 const assetObject = {
